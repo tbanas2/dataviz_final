@@ -56,17 +56,17 @@ var svg = d3.select("body")
   .attr("height", height);
 
 // Load in my states data!
-d3.csv("https://gist.githubusercontent.com/wboykinm/dbbe50d1023f90d4e241712395c27fb3/raw/9753ba3a47f884384ab585a42fc1be84a4a474ca/statesdata.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/tbanas2/dataviz_final/main/data/stateval_demo.csv", function(data) {
 	var dataArray = [];
 	for (var d = 0; d < data.length; d++) {
 		dataArray.push(parseFloat(data[d].value))
 	}
 	var minVal = d3.min(dataArray)
 	var maxVal = d3.max(dataArray)
-	var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor])
+	var ramp = d3.scaleOrdinal().domain([minVal,maxVal]).range(["#1f77b4", "#ff7f0e"])
 	
   // Load GeoJSON data and merge with states data
-  d3.json("https://gist.githubusercontent.com/wboykinm/dbbe50d1023f90d4e241712395c27fb3/raw/9753ba3a47f884384ab585a42fc1be84a4a474ca/us-states.json", function(json) {
+  d3.json("https://raw.githubusercontent.com/tbanas2/dataviz_final/main/data/states.json", function(json) {
 
     // Loop through each state data value in the .csv file
     for (var i = 0; i < data.length; i++) {
