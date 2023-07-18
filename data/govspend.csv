@@ -1,17 +1,17 @@
-﻿Country,Value
-Norway,29726
-Iceland,24427
-Finland,23353
-Denmark,23140
-Germany,18656
-Sweden,18010
-Austria,12864
-Slovenia,11664
-New Zealand,10349
-Spain,9084
-Chile,8450
-Lithuania,8184
-Ausralia,8088
-Hungary,7222
-Israel,3327
-United States,500
+﻿country,spend,gdp
+Australia,8088,51692.84275
+Austria,12864,48586.80132
+Chile,8450,13231.70421
+Denmark,23140,61063.31643
+Finland,23353,48744.98813
+Germany,18656,46208.42947
+Hungary,7222,15980.74089
+Iceland,24427,59270.18005
+Israel,3327,44168.94364
+Lithuania,8184,20233.64135
+New Zealand,10349,41441.46667
+Norway,29726,67329.67779
+Slovenia,11664,25517.33067
+Spain,9084,27063.19392
+Sweden,18010,52274.40879
+United States,500,63593.44362
