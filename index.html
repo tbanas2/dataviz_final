@@ -3,6 +3,7 @@
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Load d3-annotation -->
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 
@@ -123,6 +124,8 @@
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
         .text("gov $ per Child Care vs GDP per capita");
+
+        //320, 315 for annotation
     })
     
 
@@ -133,7 +136,7 @@
 
 <script>
     // set the dimensions and margins of the graph
-    var margin = {top: 40, right: 30, bottom: 90, left: 40},
+    var margin = {top: 40, right: 40, bottom: 90, left: 40},
         width = 460 - margin.left - margin.right,
         height = 450 - margin.top - margin.bottom;
     
@@ -188,6 +191,7 @@
       .attr("height", function(d) { return height - y(d.Value); })
       .delay(function(d,i){console.log(i) ; return(i*100)})
     
+      //Title
       svg2.append("text")
         .attr("x", (width / 2))             
         .attr("y", 0 - (margin.top/8))
@@ -195,5 +199,35 @@
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
         .text("Average Annual Income");
+
+        //Annotation
+        const type = d3.annotationLabel
+
+        const annotations = [
+       {
+          note: {
+            label: "Added connector end 'arrow', note wrap '180', and note align 'left'",
+            title: "d3.annotationLabel",
+            wrap: 150,
+            align: "left"
+          },
+          connector: {
+            end: "arrow" // 'dot' also available
+          },
+          x: 32,
+          y: 216,
+          dy: -50,
+          dx: 50
+        }]
+
+      const makeAnnotations = d3.annotation()
+          .type(d3.annotationLabel)
+          .annotations(annotations)
+
+        
+          svg2.append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations)
+
     })
     </script>
