@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style type="text/css">
 /* On mouse hover, lighten state color */
 path:hover {
@@ -78,6 +79,7 @@ body {
 			.append("div")   
 			.attr("class", "tooltip")               
 			.style("opacity", 0);
+
 	// Load in data
 	d3.csv("https://raw.githubusercontent.com/tbanas2/dataviz_final/main/data/stateval_demo.csv", function(data) {
 		var dataArray = [];
@@ -145,36 +147,44 @@ body {
 			   .style("opacity", 0); 
 			});
 		  
-			// add a legend
-			var w = 140, h = 300;
-	
-			var key = d3.select("#my_map")
-				.append("svg")
-				.attr("width", w)
-				.attr("height", h)
-				.attr("class", "legend");
+			svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 20 )
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text("Income Support by State");
 
-				var ordinal = d3.scaleOrdinal()
-				.domain(["a", "b", "c", "d", "e"])
-				.range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
+		// add a legend
+		var w = 140, h = 300;
+
+		var key = d3.select("#my_map")
+			.append("svg")
+			.attr("width", w)
+			.attr("height", h)
+			.attr("class", "legend");
+
+			var ordinal = d3.scaleOrdinal()
+			.domain(["a", "b", "c", "d", "e"])
+			.range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
 
 
-				key.append("g")
-				.attr("class", "legendOrdinal")
-				.attr("transform", "translate(20,20)");
+			key.append("g")
+			.attr("class", "legendOrdinal")
+			.attr("transform", "translate(20,20)");
 
-				var legendOrdinal = d3.legendColor()
-				//d3 symbol creates a path-string, for example
-				//"M0,-8.059274488676564L9.306048591020996,
-				//8.059274488676564 -9.306048591020996,8.059274488676564Z"
-				.shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
-				.shapePadding(10)
-				//use cellFilter to hide the "e" cell
-				.cellFilter(function(d){ return d.label !== "e" })
-				.scale(ordinal);
+			var legendOrdinal = d3.legendColor()
+			//d3 symbol creates a path-string, for example
+			//"M0,-8.059274488676564L9.306048591020996,
+			//8.059274488676564 -9.306048591020996,8.059274488676564Z"
+			.shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
+			.shapePadding(10)
+			//use cellFilter to hide the "e" cell
+			.cellFilter(function(d){ return d.label !== "e" })
+			.scale(ordinal);
 
-				key.select(".legendOrdinal")
-				.call(legendOrdinal);
+			key.select(".legendOrdinal")
+			.call(legendOrdinal);
 
 
 
