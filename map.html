@@ -153,42 +153,31 @@ body {
 				.attr("width", w)
 				.attr("height", h)
 				.attr("class", "legend");
-	
-			var legend = key.append("defs")
-				.append("svg:linearGradient")
-				.attr("id", "gradient")
-				.attr("x1", "100%")
-				.attr("y1", "0%")
-				.attr("x2", "100%")
-				.attr("y2", "100%")
-				.attr("spreadMethod", "pad");
-	
-			legend.append("stop")
-				.attr("offset", "0%")
-				.attr("stop-color", highColor)
-				.attr("stop-opacity", 1);
-				
-			legend.append("stop")
-				.attr("offset", "100%")
-				.attr("stop-color", lowColor)
-				.attr("stop-opacity", 1);
-	
-			key.append("rect")
-				.attr("width", w - 100)
-				.attr("height", h)
-				.style("fill", "url(#gradient)")
-				.attr("transform", "translate(0,10)");
-	
-			var y = d3.scaleLinear()
-				.range([h, 0])
-				.domain([minVal, maxVal]);
-	
-			var yAxis = d3.axisRight(y);
-	
-			key.append("g")
-				.attr("class", "y axis")
-				.attr("transform", "translate(41,10)")
-				.call(yAxis)
+
+				var ordinal = d3.scaleOrdinal()
+				.domain(["a", "b", "c", "d", "e"])
+				.range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
+
+
+				key.append("g")
+				.attr("class", "legendOrdinal")
+				.attr("transform", "translate(20,20)");
+
+				var legendOrdinal = d3.legendColor()
+				//d3 symbol creates a path-string, for example
+				//"M0,-8.059274488676564L9.306048591020996,
+				//8.059274488676564 -9.306048591020996,8.059274488676564Z"
+				.shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
+				.shapePadding(10)
+				//use cellFilter to hide the "e" cell
+				.cellFilter(function(d){ return d.label !== "e" })
+				.scale(ordinal);
+
+				key.select(".legendOrdinal")
+				.call(legendOrdinal);
+
+
+
 	  });
 	});
 	</script>
