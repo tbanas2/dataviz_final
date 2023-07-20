@@ -17,7 +17,7 @@ div.tooltip {
 	width: 60px;                  
 	height: 68px;                 
 	padding: 2px;             
-	font: 12px sans-serif;        
+	font: 8px sans-serif;        
 	background: white;   
 	border: 0px;      
 	border-radius: 8px;           
@@ -81,7 +81,7 @@ body {
 			.style("opacity", 0);
 
 	// Load in data
-	d3.csv("https://raw.githubusercontent.com/tbanas2/dataviz_final/main/data/stateval_demo.csv", function(data) {
+	d3.csv("https://raw.githubusercontent.com/tbanas2/dataviz_final/main/data/statevals.csv", function(data) {
 		var dataArray = [];
 		var descArray = [];
 		for (var d = 0; d < data.length; d++) {
